@@ -72,11 +72,21 @@ function PartnerLogo({ name, filename }: { name: string; filename: string }) {
 
 function ValuePoint({ number, title, desc }: { number: string; title: string; desc: string }) {
     return (
-        <div>
+        <div
+            className="transition-all duration-300 hover:-translate-y-1"
+            style={{
+                background: 'rgba(10, 22, 40, 0.3)',
+                backdropFilter: 'blur(6px)',
+                WebkitBackdropFilter: 'blur(6px)',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid rgba(193, 154, 68, 0.2)',
+                padding: '28px',
+            }}
+        >
             <span
                 className="font-display font-medium block"
                 style={{
-                    fontSize: '48px',
+                    fontSize: '40px',
                     color: 'var(--color-gold)',
                     opacity: 0.5,
                     lineHeight: '1',
@@ -85,16 +95,16 @@ function ValuePoint({ number, title, desc }: { number: string; title: string; de
                 {number}
             </span>
             <h4
-                className="font-display font-medium mt-2"
-                style={{ fontSize: '20px', color: '#FFFFFF' }}
+                className="font-display font-medium mt-3"
+                style={{ fontSize: '18px', color: '#FFFFFF' }}
             >
                 {title}
             </h4>
             <p
                 className="font-body mt-2"
                 style={{
-                    fontSize: '15px',
-                    color: 'rgba(255,255,255,0.7)',
+                    fontSize: '14px',
+                    color: 'rgba(255,255,255,0.85)',
                     lineHeight: '160%',
                 }}
             >
@@ -166,14 +176,28 @@ export default function PartnersSection() {
 
             {/* Content Layer */}
             <div className="relative z-10">
+                {/* Header with frosted card */}
                 <div className="container-main">
-                    <SectionHeader
-                        label={t.partners.label}
-                        title={t.partners.title}
-                        subtitle={t.partners.subtitle}
-                        light
-                        centered
-                    />
+                    <div
+                        style={{
+                            background: 'rgba(10, 22, 40, 0.25)',
+                            backdropFilter: 'blur(8px)',
+                            WebkitBackdropFilter: 'blur(8px)',
+                            borderRadius: 'var(--radius-lg)',
+                            border: '1px solid rgba(193, 154, 68, 0.15)',
+                            padding: '32px',
+                            maxWidth: '720px',
+                            margin: '0 auto',
+                        }}
+                    >
+                        <SectionHeader
+                            label={t.partners.label}
+                            title={t.partners.title}
+                            subtitle={t.partners.subtitle}
+                            light
+                            centered
+                        />
+                    </div>
                 </div>
 
                 {/* Marquee */}
@@ -194,11 +218,11 @@ export default function PartnersSection() {
                     </Marquee>
                 </div>
 
-                {/* Value Proposition */}
+                {/* Value Proposition with frosted glass cards */}
                 <div className="container-main" style={{ marginTop: '80px' }}>
                     <div
                         ref={valuesRef}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
                     >
                         {t.partners.values.map((val, i) => (
                             <ValuePoint

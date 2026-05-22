@@ -141,7 +141,48 @@
   .hover\:scale-103:hover {
     transform: scale(1.03);
   }
+    /* ==================== Partners Marquee - Pure CSS ==================== */
+    .marquee-track {
+        display: flex;
+        gap: 24px;
+        animation: marquee 15s linear infinite;
+        will-change: transform;
+    }
 
+    .marquee-ltr {
+        animation: marquee-ltr 15s linear infinite;
+    }
+
+    .marquee-rtl {
+        animation: marquee-rtl 15s linear infinite;
+    }
+
+    /* Left to Right (English) */
+    @keyframes marquee-ltr {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Right to Left (Arabic) */
+    @keyframes marquee-rtl {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(50%);
+        }
+    }
+
+    /* Pause on hover */
+    .marquee-track:hover {
+        animation-play-state: paused;
+    }
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
     20% { transform: translateX(-8px); }

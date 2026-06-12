@@ -36,11 +36,17 @@ export default function ServicesSection() {
     }, [lang]);
 
     return (
-        <section id="services" className="relative py-20 px-4" style={{ backgroundColor: '#050A10' }}> {/* Dark background */}
+        <section id="services" className="relative py-20 px-4" style={{ backgroundColor: 'var(--color-dark-section)' }}>
 
-            {/* Background Effect (Optional) */}
-            <div className="absolute inset-0 z-0 opacity-40">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1a253a] via-[#050A10] to-[#050A10]" />
+            {/* Background Effect */}
+            <div className="absolute inset-0 z-0 opacity-70">
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background:
+                            'radial-gradient(ellipse at center, rgba(47,166,154,0.22) 0%, rgba(15,118,110,0.12) 36%, var(--color-dark-section) 72%)',
+                    }}
+                />
             </div>
 
             <div className="container-main relative z-10">

@@ -1,4 +1,4 @@
-﻿interface ServiceCardProps {
+interface ServiceCardProps {
     title: string;
     description: string;
     image: string; // Make this required for the big top image
@@ -10,24 +10,24 @@ export default function ServiceCard({ title, description, image, icon }: Service
         <div
             className="group relative flex flex-col h-full transition-all duration-500 ease-out"
             style={{
-                background: 'rgba(10, 22, 40, 0.6)',
+                background: 'rgba(3, 72, 63, 0.62)',
                 backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
                 borderRadius: 'var(--radius-lg)',
                 overflow: 'hidden',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.22)',
             }}
             onMouseEnter={(e) => {
                 const el = e.currentTarget;
-                el.style.borderColor = 'rgba(193,154,68,0.4)';
+                el.style.borderColor = 'rgba(47, 166, 154, 0.55)';
                 el.style.transform = 'translateY(-5px)';
-                el.style.boxShadow = '0 15px 40px rgba(193, 154, 68, 0.15)';
+                el.style.boxShadow = '0 15px 40px rgba(15, 118, 110, 0.22)';
             }}
             onMouseLeave={(e) => {
                 const el = e.currentTarget;
-                el.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                el.style.borderColor = 'rgba(255, 255, 255, 0.12)';
                 el.style.transform = 'translateY(0)';
-                el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+                el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.22)';
             }}
         >
             {/* ================= TOP IMAGE SECTION ================= */}
@@ -40,14 +40,14 @@ export default function ServiceCard({ title, description, image, icon }: Service
                 />
 
                 {/* Dark Gradient Overlay at bottom of image to blend with text */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,22,40,0.9)] to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(3,72,63,0.92)] to-transparent opacity-65" />
 
                 {/* Small Badge/Icon in Top-Left (Optional) */}
                 {icon && (
                     <div
                         className="absolute top-4 left-4 p-2 rounded-full backdrop-blur-md"
                         style={{
-                            background: 'rgba(255,255,255,0.1)',
+                            background: 'rgba(255,255,255,0.12)',
                             border: '1px solid rgba(255,255,255,0.2)',
                         }}
                     >
@@ -67,7 +67,7 @@ export default function ServiceCard({ title, description, image, icon }: Service
                 <p
                     className="font-body text-sm leading-relaxed"
                     style={{
-                        color: 'rgba(255,255,255,0.7)',
+                        color: 'rgba(255,255,255,0.72)',
                         lineHeight: '160%',
                     }}
                 >

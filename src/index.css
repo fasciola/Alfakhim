@@ -4,19 +4,19 @@
 
 @layer base {
   :root {
-    --color-navy: #0A1628;
-    --color-gold: #C19A44;
-    --color-gold-light: #D4B06A;
-    --color-cream: #FAF8F3;
-    --color-warm-white: #F7F7F5;
-    --color-surface-warm: #F0EDE7;
-    --color-dark-section: #0A1628;
-    --color-text-primary: #0A1628;
-    --color-text-secondary: #5A6677;
+    --color-navy: #03483F;
+    --color-gold: #0F766E;
+    --color-gold-light: #2FA69A;
+    --color-cream: #F8FAF7;
+    --color-warm-white: #FFFFFF;
+    --color-surface-warm: #EEF5F2;
+    --color-dark-section: #022C28;
+    --color-text-primary: #03483F;
+    --color-text-secondary: #496A65;
     --color-text-light: #FFFFFF;
-    --color-text-muted-dark: rgba(255,255,255,0.6);
-    --color-divider: rgba(10,22,40,0.1);
-    --color-divider-light: rgba(255,255,255,0.15);
+    --color-text-muted-dark: rgba(255,255,255,0.68);
+    --color-divider: rgba(3,72,63,0.12);
+    --color-divider-light: rgba(255,255,255,0.16);
 
     --space-section: 120px;
     --space-section-mobile: 72px;
@@ -41,25 +41,25 @@
     --duration-hero: 1.2s;
     --stagger-default: 0.08s;
 
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --background: 120 23% 97%;
+    --foreground: 173 92% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 173 92% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    --popover-foreground: 173 92% 15%;
+    --primary: 173 92% 15%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --secondary: 160 27% 95%;
+    --secondary-foreground: 173 92% 15%;
+    --muted: 160 27% 95%;
+    --muted-foreground: 168 19% 35%;
+    --accent: 174 77% 26%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --border: 165 21% 88%;
+    --input: 165 21% 88%;
+    --ring: 174 77% 26%;
     --radius: 0.625rem;
   }
 
@@ -128,12 +128,12 @@
   select:focus,
   textarea:focus {
     border-color: var(--color-gold) !important;
-    box-shadow: 0 0 0 3px rgba(193, 154, 68, 0.1) !important;
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14) !important;
     outline: none !important;
   }
 
   ::placeholder {
-    color: rgba(90, 102, 119, 0.5) !important;
+    color: rgba(73, 106, 101, 0.5) !important;
   }
 }
 

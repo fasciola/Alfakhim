@@ -155,11 +155,9 @@ const FRAG_SRC = [
   '  vec3 L2 = normalize(vec3(-0.7 + cos(t * 0.06) * 0.2, -0.3 + sin(t * 0.08) * 0.15, 0.6));',
   '  vec3 V = vec3(0.0, 0.0, 1.0);',
   '',
-  '  // Background: pure black',
   '  float bgD = length(p);',
   '  vec3 bg = mix(vec3(0.015), vec3(0.002), smoothstep(0.0, 1.0, bgD));',
   '',
-  '  // Layer 1: dark silk',
   '  vec4 ly1 = shadeLayer(',
   '    p * 0.8 + vec2(0.15, t * 0.015), t,',
   '    0.0, 2.0, 0.5,',
@@ -170,7 +168,6 @@ const FRAG_SRC = [
   '    0.22, 26.0, L1, L2, V, u_sheenIntensity * 0.5',
   '  );',
   '',
-  '  // Layer 2: mid silk',
   '  vec4 ly2 = shadeLayer(',
   '    p * 1.0 + vec2(t * 0.012, -0.1), t,',
   '    1.0, 3.2, 0.75,',
@@ -181,7 +178,6 @@ const FRAG_SRC = [
   '    0.28, 40.0, L1, L2, V, u_sheenIntensity * 0.6',
   '  );',
   '',
-  '  // Layer 3: front silk',
   '  vec4 ly3 = shadeLayer(',
   '    p * 1.2 + vec2(-t * 0.008, t * 0.02), t,',
   '    2.0, 4.5, 1.0,',
@@ -192,7 +188,6 @@ const FRAG_SRC = [
   '    0.35, 55.0, L1, L2, V, u_sheenIntensity * 0.7',
   '  );',
   '',
-  '  // Composite back-to-front',
   '  vec3 col = bg;',
   '  col = mix(col, ly1.rgb, ly1.a);',
   '  col += vec3(0.04) * ly1.a * ly2.a * 0.06;',
@@ -200,22 +195,17 @@ const FRAG_SRC = [
   '  col += vec3(0.03) * ly2.a * ly3.a * 0.04;',
   '  col = mix(col, ly3.rgb, ly3.a);',
   '',
-  '  // Strong vignette — push edges to black',
   '  float vig = 1.0 - smoothstep(0.15, 0.95, length(p * vec2(0.85, 1.0)));',
   '  col *= 0.4 + 0.6 * vig;',
   '',
-  '  // Full desaturate — pure white light',
   '  float lum = dot(col, vec3(0.299, 0.587, 0.114));',
   '  col = vec3(lum);',
   '',
-  '  // Darken overall — keep contrast, not foggy',
   '  col = pow(col, vec3(1.6)) * 1.8;',
   '',
-  '  // ACES tone mapping',
   '  col = col * (2.51 * col + 0.03) / (col * (2.43 * col + 0.59) + 0.14);',
   '  col = pow(max(col, vec3(0.0)), vec3(0.4545));',
   '',
-  '  // Film grain',
   '  float grain = hash12(gl_FragCoord.xy + fract(u_time * 7.13) * 100.0);',
   '  col += (grain - 0.5) * 0.012;',
   '',
@@ -236,7 +226,6 @@ export default function RainOnGlass() {
     const canvasEl: HTMLCanvasElement = canvas;
     const glContext: WebGLRenderingContext = gl;
 
-    // Compile shaders
     function compile(type: number, src: string) {
       const s = glContext.createShader(type)!;
       glContext.shaderSource(s, src);
@@ -262,7 +251,6 @@ export default function RainOnGlass() {
     }
     glContext.useProgram(prog);
 
-    // Full-screen triangle
     const buf = glContext.createBuffer();
     glContext.bindBuffer(glContext.ARRAY_BUFFER, buf);
     glContext.bufferData(glContext.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), glContext.STATIC_DRAW);
@@ -270,7 +258,6 @@ export default function RainOnGlass() {
     glContext.enableVertexAttribArray(aPos);
     glContext.vertexAttribPointer(aPos, 2, glContext.FLOAT, false, 0, 0);
 
-    // Uniforms
     const uTime = glContext.getUniformLocation(prog, 'u_time');
     const uRes = glContext.getUniformLocation(prog, 'u_res');
     const uFlow = glContext.getUniformLocation(prog, 'u_flowSpeed');
@@ -283,8 +270,9 @@ export default function RainOnGlass() {
     let animId = 0;
 
     const onMove = (e: MouseEvent) => {
-      mx = e.clientX;
-      my = canvasEl.clientHeight - e.clientY;
+      const rect = canvasEl.getBoundingClientRect();
+      mx = e.clientX - rect.left;
+      my = rect.height - (e.clientY - rect.top);
     };
     const onLeave = () => { mx = -1.0; my = -1.0; };
     const onResize = () => { needsResize = true; };
@@ -295,12 +283,14 @@ export default function RainOnGlass() {
 
     function resize() {
       needsResize = false;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      const parent = canvasEl.parentElement;
+      const rect = parent?.getBoundingClientRect();
+      const w = Math.max(1, Math.round(rect?.width || canvasEl.clientWidth || window.innerWidth));
+      const h = Math.max(1, Math.round(rect?.height || canvasEl.clientHeight || window.innerHeight));
       canvasEl.width = w;
       canvasEl.height = h;
-      canvasEl.style.width = w + 'px';
-      canvasEl.style.height = h + 'px';
+      canvasEl.style.width = '100%';
+      canvasEl.style.height = '100%';
       glContext.viewport(0, 0, w, h);
       glContext.uniform2f(uRes, w, h);
     }
@@ -338,8 +328,8 @@ export default function RainOnGlass() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0"
-      style={{ zIndex: 0, width: '100vw', height: '100vh' }}
+      className="absolute inset-0"
+      style={{ zIndex: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
     />
   );
 }
